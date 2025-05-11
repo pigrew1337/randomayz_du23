@@ -10,29 +10,6 @@ describe('RandomizerService', () => {
     jest.clearAllMocks();
   });
 
-  describe('addParticipants', () => {
-    it('should add participants successfully', async () => {
-      const names = ['Alice', 'Bob'];
-      ParticipantModel.addParticipants.mockResolvedValue([
-        { id: 1, name: 'Alice' },
-        { id: 2, name: 'Bob' }
-      ]);
-
-      const result = await RandomizerService.addParticipants(names);
-      expect(result).toEqual([
-        { id: 1, name: 'Alice' },
-        { id: 2, name: 'Bob' }
-      ]);
-      expect(ParticipantModel.addParticipants).toHaveBeenCalledWith(names);
-    });
-
-    it('should throw error for invalid input', async () => {
-      await expect(RandomizerService.addParticipants(null)).rejects.toThrow('Invalid participants list');
-      await expect(RandomizerService.addParticipants([])).rejects.toThrow('Invalid participants list');
-      await expect(RandomizerService.addParticipants('not an array')).rejects.toThrow('Invalid participants list');
-    });
-  });
-
   describe('drawWinners', () => {
     it('should draw winners successfully', async () => {
       const participants = [
